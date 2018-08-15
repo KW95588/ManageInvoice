@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Xero API Demo</h1>
+    <p class="lead">Click the button to create invoice at Xero</p>
+
+    @Html.ActionLink("Create Invoice", "Create", "Invoice", "",new {@class="btn btn-primary btn-lg"})
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            This app use Xero APIs to create invoice
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    
+</div>

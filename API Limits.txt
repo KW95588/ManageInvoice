@@ -1,0 +1,22 @@
+API Limits
+https://developer.xero.com/documentation/auth-and-limits/xero-api-limits
+
+
+ There are limits to the number of API calls that your application can make against a particular Xero organisation.
+
+    Minute Limit: 60 calls in a rolling 60 second window
+    Daily Limit: 5000 calls in a rolling 24 hour window
+
+If you exceed either rate limit you will receive a HTTP 503 (Service Unavailable) response
+
+Private application limits
+
+You can create a maximum of 2 private applications against a Xero organisation regardless of the user that created the application.
+
+System limits
+Invoicing
+
+Xero is designed for volumes of up to 1,000 Sales invoices (Accounts Receivables) and 1,000 Purchases bills (Accounts Payables) per month, dependent also on the frequency of invoicing during the month, variability of amounts and the frequency of sales tax reporting requirements.
+Bank Transactions – Spend & Receive Money
+
+Xero is designed for volumes of up to around 2,000 bank transactions per month, also dependent on the frequency of transactions during the month and variability of transaction values. 
