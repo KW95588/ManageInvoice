@@ -47,6 +47,7 @@ namespace InvoiceManager.Controllers
             return View();
         }
 
+
         /*
         API Limits
             https://developer.xero.com/documentation/auth-and-limits/xero-api-limits
@@ -100,7 +101,7 @@ namespace InvoiceManager.Controllers
 
                 var contacts = repository.Contacts.Where(c => c.Name == "Marine Systems");
 
-
+                //new comment
 
                 var uInvoice = new XeroApi.Model.Invoice();
                 var uContact = new XeroApi.Model.Contact();
@@ -131,7 +132,7 @@ namespace InvoiceManager.Controllers
                 uInvoice.LineItems.Add(uLineItem1);
 
                 var uLineItem2 = new XeroApi.Model.LineItem();
-                uLineItem2.Quantity = 2;
+                uLineItem2.Quantity = 3;
                 uLineItem2.Description = "Product 2";
                 uLineItem2.AccountCode = "200";
                 uLineItem2.UnitAmount = 50;
@@ -139,28 +140,29 @@ namespace InvoiceManager.Controllers
 
                 var sResults = repository.Create((XeroApi.Model.Invoice)uInvoice);
 
+                var theAccount = repository.Accounts.FirstOrDefault();
 
-                //the following section is to 
-                // create a payment for the invoice
-                var invoiceNumber = sResults.InvoiceID;
+                //the following section is to create a payment for the invoice
+                var invoiceNumber = sResults.InvoiceNumber;
                 var invoiceID = sResults.InvoiceID;
-                var NewInvoice = repository.Invoices.Where(i => i.InvoiceID == invoiceNumber).FirstOrDefault();
+                var NewInvoice = repository.Invoices.Where(i => i.InvoiceID == invoiceID).FirstOrDefault();
 
                 //var account = repository.Accounts.Where(a => a.Name == "MyAccount").FirstOrDefault();
-                //var account = new XeroApi.Model.Account();
+                var account = new XeroApi.Model.Account();
 
                 //account.ReportingCode = "ABC";
 
-                //var Payment  = new XeroApi.Model.Payment();
+                var Payment = new XeroApi.Model.Payment();
                 //Payment.Account = (XeroApi.Model.Account)account;
-                //Payment.Invoice = (XeroApi.Model.Invoice)NewInvoice;
-                //Payment.Invoice.InvoiceNumber = invoiceNumber.ToString();
-                //Payment.Invoice.InvoiceID = invoiceID;
-                //Payment.Status = "AUTHORISED";
-                //Payment.Date = DateTime.Now;
-                //Payment.Amount = 150;
+                Payment.Account = theAccount;
+                Payment.Invoice = (XeroApi.Model.Invoice)NewInvoice;
+                Payment.Invoice.InvoiceNumber = invoiceNumber.ToString();
+                Payment.Invoice.InvoiceID = invoiceID;
+                Payment.Status = "AUTHORISED";
+                Payment.Date = DateTime.Now;
+                Payment.Amount = 200;
 
-                //var paymentResults = repository.Create((XeroApi.Model.Payment)Payment);
+                var paymentResults = repository.Create((XeroApi.Model.Payment)Payment);
 
                 db.Invoice.Add(invoice);
                 db.SaveChanges();
