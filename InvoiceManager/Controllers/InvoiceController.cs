@@ -162,8 +162,6 @@ namespace InvoiceManager.Controllers
 
                 //var paymentResults = repository.Create((XeroApi.Model.Payment)Payment);
 
-
-
                 db.Invoice.Add(invoice);
                 db.SaveChanges();
                 return RedirectToAction("Index");
